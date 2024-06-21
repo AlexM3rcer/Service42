@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.AuthController">
+   <children>
+       <TextField fx:id="loginField" layoutX="76.0" layoutY="69.0" promptText="Логин" />
+       <PasswordField fx:id="passField" layoutX="76.0" layoutY="106.0" promptText="Пароль" />
+       <Button fx:id="authorization" layoutX="107.0" layoutY="171.0" onAction="#handleButtonAction" text="Авторизация" />
+      <Button fx:id="reg" layoutX="109.0" layoutY="235.0" onAction="#handleButtonAction" text="Регистрация" />
+      <Label layoutX="55.0" layoutY="14.0" prefHeight="35.0" prefWidth="213.0" text="Автомастерская42">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="incorrectData" layoutX="61.0" layoutY="134.0" prefHeight="32.0" prefWidth="178.0" textFill="RED">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
