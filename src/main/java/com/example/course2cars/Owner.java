@@ -2,7 +2,6 @@ package com.example.course2cars;
 
 public class Owner {
     String phone;
-
     String address;
     String name;
     String login;

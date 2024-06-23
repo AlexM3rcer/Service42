@@ -9,8 +9,8 @@
       <TextField fx:id="regName" layoutX="90.0" layoutY="69.0" promptText="Имя" />
       <TextField fx:id="regPhone" layoutX="90.0" layoutY="111.0" promptText="Телефон" />
       <TextField fx:id="regAddress" layoutX="90.0" layoutY="187.0" promptText="Адрес" />
-      <TextField fx:id="regLogin" layoutX="90.0" layoutY="187.0" promptText="Логин" />
-      <TextField fx:id="regPassword" layoutX="90.0" layoutY="187.0" promptText="Пароль" />
+      <TextField fx:id="regLogin" layoutX="90.0" layoutY="153.0" promptText="Логин" />
+      <TextField fx:id="regPassword" layoutX="90.0" layoutY="220.0" promptText="Пароль" />
       <Button fx:id="regFinish" layoutX="104.0" layoutY="270.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="130.0" text="Зарегистрироваться" />
       <Button fx:id="authorization" layoutX="110.0" layoutY="345.0" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="118.0" text="Авторизоваться" />
       <Label layoutX="99.0" layoutY="14.0" prefHeight="35.0" prefWidth="139.0" text="Регистрация">

@@ -19,19 +19,11 @@ import java.util.Objects;
 // для этих элементов (кнопки, текстовые поля и т.д.)
 public class AuthController {
     @FXML
-    private Label welcomeText;
-    @FXML
     private Label incorrectData;
     @FXML
     private Button authorization;
     @FXML
     private Button reg;
-    @FXML
-    private Button requests;
-    @FXML
-    private Button user;
-    @FXML
-    private Button tourCatalogs;
     @FXML
     private TextField loginField;
     @FXML
@@ -39,11 +31,12 @@ public class AuthController {
 
     boolean authorize() {
         DataBase db = new DataBase();
-        User user = new User();
-        user.setPhone(loginField.getText()); // Присваиваем user текст из поля логина
-        user.setPassport(passField.getText()); // Присваиваем user текст из поля пароля
-        ResultSet resultSet = db.getUser(user); // Присваиваем resultSet итог выборки данных (пользователя)
+        Owner owner = new Owner();
+        owner.setLogin(loginField.getText()); // Присваиваем owner текст из поля логина
+        owner.setPassword(passField.getText()); // Присваиваем owner текст из поля пароля
         try {
+            ResultSet resultSet = db.getOwner(owner); // Присваиваем resultSet итог выборки данных (пользователя)
+
             if (resultSet.next()) { // Если есть пользователь - возвращается true
                 return true;
             }

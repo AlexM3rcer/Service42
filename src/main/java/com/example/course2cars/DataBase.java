@@ -19,17 +19,17 @@ public class DataBase extends Config {
 
     public void registerUser(Owner owner) {
         try {
-            String insert = "INSERT INTO " + DBnames.KLIENT_TABLE + "(" + //sql-запрос для ввода данных
-                DBnames.KLIENT_NAME + "," + DBnames.KLIENT_PHONE + "," +
-                DBnames.KLIENT_VISA + ")" + "VALUES(?, ?, ?)";
+            String insert = "INSERT INTO " + DBnames.OWNER_TABLE + "(" + //sql-запрос для ввода данных
+                DBnames.OWNER_NAME + "," + DBnames.OWNER_ADDRESS + "," +
+                DBnames.OWNER_PHONE + "," + DBnames.OWNER_LOGIN + "," + DBnames.OWNER_PASSWORD + ")" + "VALUES(?, ?, ?, ?, ?)";
 
             PreparedStatement ps = getDbConnection().prepareStatement(insert); // Указание заготовки для подготовки к записи в базу данных
             ps.setString(1, owner.getName());
-            ps.setString(2, owner.getPhone());
-            ps.setString(3, owner.getAddress());
+            ps.setString(2, owner.getAddress());
+            ps.setString(3, owner.getPhone());
             ps.setString(4, owner.getLogin());
             ps.setString(5, owner.getPassword());
-            ps.executeUpdate(); // Запись6
+            ps.executeUpdate(); // Запись
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -37,17 +37,17 @@ public class DataBase extends Config {
         }
     }
 
-    public ResultSet getUser(Owner owner) { // Получаем пользователя для авторизации
+    public ResultSet getOwner(Owner owner) { // Получаем пользователя для авторизации
         ResultSet resultSet = null;
 
-        String select = "SELECT * FROM " + DBnames.KLIENT_TABLE + " WHERE " + // sql-запрос для выборки данных
-                DBnames.KLIENT_PHONE + "=? AND " + DBnames.KLIENT_PASSPORT + "=?";
+        String select = "SELECT * FROM " + DBnames.OWNER_TABLE + " WHERE " + // sql-запрос для выборки данных
+                DBnames.OWNER_LOGIN + "= ? AND " + DBnames.OWNER_PASSWORD + "= ?";
 
         PreparedStatement ps;
         try {
             ps = getDbConnection().prepareStatement(select); // Указание заготовки для подготовки к чтению
-            ps.setString(1, user.getPhone());
-            ps.setString(2, user.getPassport());
+            ps.setString(1, owner.getLogin());
+            ps.setString(2, owner.getPassword());
             resultSet = ps.executeQuery(); // Получение данных из запроса
         } catch (SQLException e) {
             throw new RuntimeException(e);
