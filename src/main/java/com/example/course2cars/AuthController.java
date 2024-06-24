@@ -38,6 +38,11 @@ public class AuthController {
             ResultSet resultSet = db.getOwner(owner); // Присваиваем resultSet итог выборки данных (пользователя)
 
             if (resultSet.next()) { // Если есть пользователь - возвращается true
+//                Config.setDbUser("user");
+                owner.setName(resultSet.getString(DBnames.OWNER_NAME));
+                owner.setAddress(resultSet.getString(DBnames.OWNER_ADDRESS));
+                owner.setPhone(resultSet.getString(DBnames.OWNER_PHONE));
+                Config.currentOwner = owner;
                 return true;
             }
         } catch (SQLException e) {

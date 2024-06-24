@@ -6,11 +6,11 @@
 
 <AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.MainController">
    <children>
-      <ButtonBar layoutX="194.0" layoutY="14.0" prefHeight="40.0" prefWidth="392.0">
+      <ButtonBar layoutX="180.0" layoutY="14.0" prefHeight="40.0" prefWidth="392.0">
          <buttons>
-            <Button fx:id="parts" mnemonicParsing="false" prefHeight="26.0" style="-fx-background-color: GRAY;" text="Запчасти" />
-            <Button fx:id="assemble" mnemonicParsing="false" text="Сборки" />
-            <Button fx:id="userCab" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
+            <Button fx:id="auto" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" text="Мои автомобили" />
+            <Button fx:id="assemble" onAction="#changeWindow" mnemonicParsing="false" text="Сборки" />
+            <Button fx:id="userCab" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
          </buttons>
       </ButtonBar>
    </children>

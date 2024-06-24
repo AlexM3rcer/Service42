@@ -16,8 +16,10 @@ import java.util.Objects;
 // Здесь указаны все элементы и методы
 // для этих элементов (кнопки, текстовые поля и т.д.)
 public class RegController {
-    public TextField regLogin;
-    public TextField regPassword;
+    @FXML
+    private TextField regLogin;
+    @FXML
+    private TextField regPassword;
     @FXML
     private Label regComplete;
     @FXML
@@ -29,15 +31,13 @@ public class RegController {
     @FXML
     private TextField regPhone;
     @FXML
-    private TextField regVisa;
-    @FXML
     private TextField regAddress;
     @FXML
     void register() { // Регистрация пользователя
         DataBase db = new DataBase(); // Создаем объект класса базы данных для регистрации
 
         // Делаем заготовку для записи в базу данных
-        Owner owner = new Owner(regName.getText(), regPhone.getText(), regAddress.getText(), regLogin.getText(), regPassword.getText());
+        Owner owner = new Owner(regPhone.getText(), regAddress.getText(), regName.getText(), regLogin.getText(), regPassword.getText());
 
         db.registerUser(owner); // при нажатии на кнопку regFinish заносим запись в базу данных
 
