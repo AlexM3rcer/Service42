@@ -43,6 +43,8 @@ public class DataBase extends Config {
             ps.setString(4, owner.getLogin());
             ps.setString(5, owner.getPassword());
             ps.executeUpdate(); // Запись
+            ps.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -53,7 +55,7 @@ public class DataBase extends Config {
             String insert = "INSERT INTO " + DBnames.CARS_TABLE + "(" +
                     DBnames.CARS_NUMBER + ", " + DBnames.CARS_COLOR + ", " +
                     DBnames.CARS_STAMP + ", " + DBnames.CARS_MODEL + ", " +
-                    DBnames.CARS_OWNER_ID + ") VALUES(?, ?, ?, ?, ?)";
+                    DBnames.CARS_OWNER_ID + ", " + DBnames.CARS_MILEAGE +") VALUES(?, ?, ?, ?, ?, ?)";
 
             PreparedStatement ps = getDbConnection().prepareStatement(insert);
             ps.setString(1, car.getNumber());
@@ -61,7 +63,33 @@ public class DataBase extends Config {
             ps.setString(3, car.getStamp());
             ps.setString(4, car.getModel());
             ps.setInt(5, car.getOwner_id());
+            ps.setInt(6, car.getMileage());
             ps.executeUpdate();
+            ps.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addAssemble(Assemble assemble) {
+        try {
+            String insert = "INSERT INTO " + DBnames.INSTALLATIONS_TABLE + "(" +
+                    DBnames.INSTALLATIONS_START + ", " +
+                    DBnames.INSTALLATIONS_END + ", " + DBnames.INSTALLATIONS_CAR + ", " +
+                    DBnames.INSTALLATIONS_DETAIL + ", " + DBnames.INSTALLATIONS_WORKING + ", " +
+                    DBnames.INSTALLATIONS_STAFF + ") VALUES(?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = getDbConnection().prepareStatement(insert);
+            ps.setDate(1, assemble.getStart_date());
+            ps.setDate(2, assemble.getEnd_date());
+            ps.setString(3, assemble.getCar_number());
+            ps.setString(4, assemble.getDetail_number());
+            ps.setTime(5, assemble.getWorking_time());
+            ps.setInt(6, assemble.getStaff_id());
+            ps.executeUpdate();
+            ps.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -100,7 +128,31 @@ public class DataBase extends Config {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         return resultSet;
+    }
+
+    public ArrayList<Staff> getAllStaff() throws SQLException {
+        ResultSet resultSet = null;
+        ArrayList<Staff> allStaff = new ArrayList<>();
+
+        String select = "SELECT * FROM " + DBnames.STAFF_TABLE;
+
+        PreparedStatement ps;
+        try {
+            ps = getDbConnection().prepareStatement(select); // Указание заготовки для подготовки к чтению
+            resultSet = ps.executeQuery(); // Получение данных из запроса
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (resultSet.next()) {
+            Staff staff = new Staff(resultSet.getString(DBnames.STAFF_NAME), resultSet.getInt(DBnames.STAFF_ID));
+            allStaff.add(staff);
+        }
+        resultSet.close();
+        ps.close();
+        dbConnection.close();
+        return allStaff;
     }
 
     public void updateOwner(Owner owner) {
@@ -119,10 +171,12 @@ public class DataBase extends Config {
             ps.setString(4, owner.getLogin());
             ps.setString(5, owner.getPassword());
             ps.executeUpdate();
+            dbConnection.close();
             ps.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void updateStaff(Staff staff) {
@@ -140,6 +194,7 @@ public class DataBase extends Config {
             ps.setString(4, staff.getPassword());
             ps.executeUpdate();
             ps.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

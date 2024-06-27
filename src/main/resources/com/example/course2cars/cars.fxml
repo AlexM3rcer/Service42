@@ -20,6 +20,6 @@
             <VBox fx:id="carContent" prefHeight="257.0" prefWidth="558.0" style="-fx-padding-bottom: 20; -fx-padding-top: 20;" />
          </content>
       </ScrollPane>
-      <Button fx:id="addCar" onAction="#addCar" layoutX="232.0" layoutY="349.0" mnemonicParsing="false" text="Добавить автомобиль" />
+      <Button onAction="#addCar" layoutX="232.0" layoutY="349.0" mnemonicParsing="false" text="Добавить автомобиль" />
    </children>
 </AnchorPane>

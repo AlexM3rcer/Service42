@@ -5,14 +5,16 @@ public class Car {
     private String stamp;
     private String color;
     private String number;
+    private int mileage;
     private int owner_id;
 
-    public Car(String model, String stamp, String color, String number, int owner_id) {
+    public Car(String model, String stamp, String color, String number, int owner_id, int mileage) {
         this.model = model;
         this.stamp = stamp;
         this.color = color;
         this.number = number;
         this.owner_id = owner_id;
+        this.mileage = mileage;
     }
 
     public Car() {
@@ -57,5 +59,13 @@ public class Car {
 
     public void setOwner_id(int owner_id) {
         this.owner_id = owner_id;
+    }
+
+    public int getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
     }
 }

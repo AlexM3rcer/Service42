@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.OwnerController">
    <children>
@@ -14,5 +15,11 @@
             <Button fx:id="userCab" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
          </buttons>
       </ButtonBar>
+      <ScrollPane fx:id="assemblePane" hbarPolicy="NEVER" layoutX="14.0" layoutY="64.0" prefHeight="275.0" prefWidth="570.0">
+         <content>
+            <VBox fx:id="assembleContent" prefHeight="272.0" prefWidth="551.0" style="-fx-padding-top: 20; -fx-padding-bottom: 20;" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="244.0" layoutY="353.0" mnemonicParsing="false" onAction="#addAssemble" text="Добавить сборку" />
    </children>
 </AnchorPane>

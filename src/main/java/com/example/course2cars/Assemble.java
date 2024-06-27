@@ -8,18 +8,20 @@ public class Assemble {
     private String detail_number;
     private Date end_date;
     private Date start_date;
-    private int mileage;
     private int staff_id;
     private Time working_time;
 
-    public Assemble(String car_number, String detail_number, Date end_date, Date start_date, int mileage, int staff_id, Time working_time) {
+    public Assemble(String car_number, String detail_number, Date end_date, Date start_date, int staff_id, Time working_time) {
         this.car_number = car_number;
         this.detail_number = detail_number;
         this.end_date = end_date;
         this.start_date = start_date;
-        this.mileage = mileage;
         this.staff_id = staff_id;
         this.working_time = working_time;
+    }
+
+    public Assemble() {
+
     }
 
     public String getCar_number() {
@@ -52,14 +54,6 @@ public class Assemble {
 
     public void setStart_date(Date start_date) {
         this.start_date = start_date;
-    }
-
-    public int getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
     }
 
     public int getStaff_id() {

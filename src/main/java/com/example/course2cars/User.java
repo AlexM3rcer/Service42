@@ -18,6 +18,10 @@ public class User {
         this.assembles = assembles;
     }
 
+    public void addAssemble(Assemble assemble) {
+        assembles.add(assemble);
+    }
+
     public String getAddress() {
         return address;
     }

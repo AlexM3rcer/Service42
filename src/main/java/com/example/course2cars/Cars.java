@@ -17,14 +17,15 @@ public class Cars {
         ArrayList<Car> cars = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DBnames.CARS_TABLE +
-                    " WHERE " + DBnames.CARS_OWNER_ID + " = " + Config.currentUser().getId());
+                    " WHERE " + DBnames.CARS_OWNER_ID + " = " + Config.currentOwner.getId());
             while (resultSet.next()) {
                 String model = resultSet.getString(DBnames.CARS_MODEL);
                 String stamp = resultSet.getString(DBnames.CARS_STAMP);
                 String color = resultSet.getString(DBnames.CARS_COLOR);
                 String number = resultSet.getString(DBnames.CARS_NUMBER);
                 int owner_id = resultSet.getInt(DBnames.CARS_OWNER_ID);
-                Car car = new Car(model, stamp, color, number, owner_id);
+                int mileage = resultSet.getInt(DBnames.CARS_MILEAGE);
+                Car car = new Car(model, stamp, color, number, owner_id, mileage);
                 cars.add(car);
             }
         }
@@ -41,7 +42,8 @@ public class Cars {
                 String color = resultSet.getString(DBnames.CARS_COLOR);
                 String number = resultSet.getString(DBnames.CARS_NUMBER);
                 int owner_id = resultSet.getInt(DBnames.CARS_OWNER_ID);
-                Car car = new Car(model, stamp, color, number, owner_id);
+                int mileage = resultSet.getInt(DBnames.CARS_MILEAGE);
+                Car car = new Car(model, stamp, color, number, owner_id, mileage);
                 cars.add(car);
             }
         }

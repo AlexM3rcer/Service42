@@ -13,4 +13,9 @@ public class Staff extends User {
         setLogin(user.getLogin());
         setPassword(user.getPassword());
     }
+
+    public Staff(String name, int id) {
+        setName(name);
+        setId(id);
+    }
 }

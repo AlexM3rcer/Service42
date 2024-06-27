@@ -1,22 +1,22 @@
 package com.example.course2cars;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class OwnerController {
@@ -43,12 +43,19 @@ public class OwnerController {
     public TextField addCarStamp;
     public TextField addCarModel;
     public TextField addCarColor;
-    public Button addCarConfirm;
+    public Button addCarConfirmButton;
+    public VBox assembleContent;
+    public ScrollPane assemblePane;
+    public TextField addCarMileage;
+    public ChoiceBox addAssembleCar;
+    public ChoiceBox addAssembleStaff;
+    public ChoiceBox addAssembleDetail;
+    public Button addAssembleConfirmButton;
 
     private Label carFromat(Label label) {
         label.setWrapText(true);
-        label.setMinWidth(carPane.getPrefWidth() / 4);
-        label.setMaxWidth(carPane.getPrefWidth() / 4);
+        label.setMinWidth(carPane.getPrefWidth() / 5);
+        label.setMaxWidth(carPane.getPrefWidth() / 5);
         return label;
     }
 
@@ -70,17 +77,20 @@ public class OwnerController {
             hBox.getChildren().add(carFromat(new Label("Модель: " + car.getModel())));
             hBox.getChildren().add(carFromat(new Label("Марка: " + car.getStamp())));
             hBox.getChildren().add(carFromat(new Label("Цвет: " + car.getColor())));
+            hBox.getChildren().add(carFromat(new Label("Прокат: " + car.getMileage())));
 
             carContent.getChildren().add(hBox);
         }
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
         if (idShower != null) {
             writeInfo();
-        } else if (carContent != null) {
+        } else if (carPane != null) {
             writeCars();
+        } else if (assemblePane != null) {
+            writeAssembles();
         }
     }
 
@@ -102,11 +112,97 @@ public class OwnerController {
     private void addCarConfirm(ActionEvent event) {
         DataBase db = DataBase.getDB();
         Car car = new Car(addCarModel.getText(), addCarStamp.getText(),
-                addCarColor.getText(), addCarNum.getText(), Config.currentOwner.getId());
+                addCarColor.getText(), addCarNum.getText(), Config.currentOwner.getId(),
+                Integer.parseInt(addCarMileage.getText()));
         try {
             db.addCar(car);
             Config.currentOwner.addCar(car);
         } catch (Exception e){;}
+
+        Button button = (Button) event.getSource();
+        button.getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void writeAssembles() {
+        assembleContent.getChildren().clear();
+        for (Assemble assemble : Config.currentOwner.getAssembles()) {
+            HBox hBox = new HBox();
+
+            hBox.getChildren().add(assembleFormat(new Label(assemble.getCar_number())));
+            hBox.getChildren().add(assembleFormat(new Label(assemble.getDetail_number())));
+            hBox.getChildren().add(assembleFormat(new Label("" + assemble.getStaff_id())));
+            hBox.getChildren().add(assembleFormat(new Label("" + assemble.getStart_date())));
+            hBox.getChildren().add(assembleFormat(new Label("" + assemble.getEnd_date())));
+            hBox.getChildren().add(assembleFormat(new Label("" + assemble.getWorking_time())));
+
+            carContent.getChildren().add(hBox);
+        }
+    }
+
+    private Label assembleFormat(Label label) {
+        label.setWrapText(true);
+        label.setMinWidth(assemblePane.getPrefWidth() / 6);
+        label.setMaxWidth(assemblePane.getPrefWidth() / 6);
+        return label;
+    }
+
+    private ArrayList<String> carNums(){
+        ArrayList<String> names = new ArrayList<>();
+        for (Car car : Config.currentOwner.getCars()) {
+            names.add(car.getNumber());
+        }
+        return names;
+    }
+
+    private ArrayList<String> staffNums() throws SQLException {
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<Staff> staffs = DataBase.getDB().getAllStaff();
+        for (Staff staff : staffs) {
+            names.add(staff.getName());
+        }
+        return names;
+    }
+
+    @FXML
+    private void addAssemble() throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add_assemble.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 600, 400);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Новая сборка");
+        stage.setScene(scene);
+        stage.setOnHiding(event -> writeAssembles());
+        scene.getWindow().setOnShowing(event -> {
+            try {
+                setAssembleItems();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        stage.show();
+    }
+
+    private void setAssembleItems() throws SQLException {
+        addAssembleCar.setItems(FXCollections.observableArrayList(carNums()));
+        addAssembleStaff.setItems(FXCollections.observableArrayList(staffNums()));
+    }
+
+    @FXML
+    private void addAssembleConfirm(ActionEvent event) {
+        DataBase db = DataBase.getDB();
+        Assemble assemble = new Assemble();
+        Car car = (Car) addAssembleCar.getSelectionModel().getSelectedItem();
+        Staff staff = (Staff) addAssembleStaff.getSelectionModel().getSelectedItem();
+        assemble.setCar_number(car.getNumber());
+        assemble.setStaff_id(staff.getId());
+        assemble.setStart_date(new Date(System.currentTimeMillis()));
+        try {
+            db.addAssemble(assemble);
+            Config.currentOwner.addAssemble(assemble);
+        } catch (Exception e) {;}
 
         Button button = (Button) event.getSource();
         button.getScene().getWindow().hide();
