@@ -65,10 +65,12 @@ public class UserController {
             ResultSet resultSet = db.getStaff(user); // Присваиваем resultSet итог выборки данных (пользователя)
             if (resultSet.next()) {
                 Staff staff = new Staff(user);
+                Config.currentStaff = staff;
 
                 staff.setName(resultSet.getString(DBnames.STAFF_NAME));
                 staff.setId(resultSet.getInt(DBnames.STAFF_ID));
                 staff.setAddress(resultSet.getString(DBnames.STAFF_ADDRESS));
+                staff.setAssembles(db.getAssembles());
 
             } else {
 
@@ -77,14 +79,14 @@ public class UserController {
                 if (resultSet.next()) { // Если есть пользователь - возвращается true
 //                Config.setDbUser("user");
                     Owner owner = new Owner(user);
+                    Config.currentOwner = owner;
 
                     owner.setName(resultSet.getString(DBnames.OWNER_NAME));
                     owner.setAddress(resultSet.getString(DBnames.OWNER_ADDRESS));
                     owner.setPhone(resultSet.getString(DBnames.OWNER_PHONE));
                     owner.setId(resultSet.getInt(DBnames.OWNER_ID));
                     owner.setCars(db.getOwnerCars());
-
-                    Config.currentOwner = owner;
+                    owner.setAssembles(db.getAssembles());
                     return true;
                 }
             }
@@ -96,7 +98,7 @@ public class UserController {
     }
 
     @FXML
-    private void handleButtonAction (ActionEvent event) throws Exception { // Для смены окна
+    private void changeWindow(ActionEvent event) throws Exception { // Для смены окна
         Stage stage;
         Parent root;
         Button button = (Button) event.getSource(); // Получаем кнопку, которая произвела нажатие
@@ -108,6 +110,8 @@ public class UserController {
             newWindow = "reg.fxml";
         } else if (button == auth && authorize()) { // Попытка авторизации
             newWindow = "main_page.fxml";
+        } else if (button == authorization) {
+            newWindow = "view.fxml";
         } else {
             return; // Если не получилось - метод заканчивает работу (во избежание ошибок в консоли)
         }

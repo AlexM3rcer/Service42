@@ -9,4 +9,7 @@ public class Config {
     static String dbPassword = "368952"; // Пароль пользователя
     static Owner currentOwner;
     static Staff currentStaff;
+    public static User currentOwner() {
+        return currentStaff == null ? currentOwner : currentStaff;
+    }
 }

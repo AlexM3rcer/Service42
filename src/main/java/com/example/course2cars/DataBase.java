@@ -86,11 +86,11 @@ public class DataBase extends Config {
 
     public void updateOwner(Owner owner) {
         String update = "UPDATE " + DBnames.OWNER_TABLE +
-                " SET " + DBnames.OWNER_NAME + "= ? " +
-                " SET " + DBnames.OWNER_ADDRESS + "= ? " +
-                " SET " + DBnames.OWNER_PHONE + "= ? " +
-                " SET " + DBnames.OWNER_LOGIN + "= ? " +
-                " SET " + DBnames.OWNER_PASSWORD +"= ? WHERE "
+                " SET " + DBnames.OWNER_NAME + "= ?, "
+                + DBnames.OWNER_ADDRESS + "= ?, "
+                + DBnames.OWNER_PHONE + "= ?, "
+                + DBnames.OWNER_LOGIN + "= ?, "
+                + DBnames.OWNER_PASSWORD +"= ? WHERE "
                 + DBnames.OWNER_ID + " = " + currentOwner.getId();
         try {
             PreparedStatement ps = getDbConnection().prepareStatement(update);
@@ -99,6 +99,26 @@ public class DataBase extends Config {
             ps.setString(3, owner.getPhone());
             ps.setString(4, owner.getLogin());
             ps.setString(5, owner.getPassword());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateStaff(Staff staff) {
+        String update = "UPDATE " + DBnames.STAFF_TABLE +
+                " SET " + DBnames.STAFF_NAME + "= ?, "
+                + DBnames.STAFF_ADDRESS + "= ?, "
+                + DBnames.STAFF_LOGIN + "= ?, "
+                + DBnames.STAFF_PASSWORD +"= ? WHERE "
+                + DBnames.STAFF_ID + " = " + currentStaff.getId();
+        try {
+            PreparedStatement ps = getDbConnection().prepareStatement(update);
+            ps.setString(1, staff.getName());
+            ps.setString(2, staff.getAddress());
+            ps.setString(3, staff.getLogin());
+            ps.setString(4, staff.getPassword());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException | ClassNotFoundException e) {
@@ -177,5 +197,9 @@ public class DataBase extends Config {
 
     public ArrayList<Car> getAllCars() throws SQLException, ClassNotFoundException {
         return new Cars(getDbConnection()).getAllCars();
+    }
+
+    public ArrayList<Assemble> getAssembles() throws SQLException, ClassNotFoundException {
+        return new Assembles(getDbConnection()).getAssembles();
     }
 }

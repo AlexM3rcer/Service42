@@ -34,12 +34,14 @@ public class OwnerController {
 
     @FXML
     private void initialize() {
-        idShower.setText(Integer.toString(Config.currentOwner.getId()));
-        login.setText(Config.currentOwner.getLogin());
-        password.setText(Config.currentOwner.getPassword());
-        address.setText(Config.currentOwner.getAddress());
-        name.setText(Config.currentOwner.getName());
-        phone.setText(Config.currentOwner.getPhone());
+        if (idShower != null) {
+            idShower.setText("ID: " + Config.currentOwner.getId());
+            login.setText(Config.currentOwner.getLogin());
+            password.setText(Config.currentOwner.getPassword());
+            address.setText(Config.currentOwner.getAddress());
+            name.setText(Config.currentOwner.getName());
+            phone.setText(Config.currentOwner.getPhone());
+        }
     }
     @FXML
     private void changeInfo(ActionEvent event) {

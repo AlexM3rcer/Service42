@@ -35,11 +35,11 @@ public class DBnames {
     public static final String DETAILS_PRICE = "price";
 
     public static final String INSTALLATIONS_TABLE = "installations";
-    public static final String INSTALLATIONS_CAR = "installations";
-    public static final String INSTALLATIONS_DETAIL = "installations";
-    public static final String INSTALLATIONS_END = "installations";
-    public static final String INSTALLATIONS_START = "installations";
-    public static final String INSTALLATIONS_MILEAGE = "installations";
-    public static final String INSTALLATIONS_STAFF = "installations";
-    public static final String INSTALLATIONS_WORKING = "installations";
+    public static final String INSTALLATIONS_CAR = "car_number";
+    public static final String INSTALLATIONS_DETAIL = "detail_number";
+    public static final String INSTALLATIONS_END = "end_date";
+    public static final String INSTALLATIONS_START = "start_date";
+    public static final String INSTALLATIONS_MILEAGE = "mileage";
+    public static final String INSTALLATIONS_STAFF = "staff_id";
+    public static final String INSTALLATIONS_WORKING = "working_time";
 }

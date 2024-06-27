@@ -8,6 +8,15 @@ public class User {
     private String name;
     private String login;
     private String password;
+    private ArrayList<Assemble> assembles;
+
+    public ArrayList<Assemble> getAssembles() {
+        return assembles;
+    }
+
+    public void setAssembles(ArrayList<Assemble> assembles) {
+        this.assembles = assembles;
+    }
 
     public String getAddress() {
         return address;
@@ -48,4 +57,5 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
 }

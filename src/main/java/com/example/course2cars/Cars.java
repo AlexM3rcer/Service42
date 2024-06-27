@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cars {
     Connection connection;
@@ -18,7 +17,7 @@ public class Cars {
         ArrayList<Car> cars = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DBnames.CARS_TABLE +
-                    " WHERE " + DBnames.CARS_OWNER_ID + " = " + Config.currentOwner.getId());
+                    " WHERE " + DBnames.CARS_OWNER_ID + " = " + Config.currentOwner().getId());
             while (resultSet.next()) {
                 String model = resultSet.getString(DBnames.CARS_MODEL);
                 String stamp = resultSet.getString(DBnames.CARS_STAMP);

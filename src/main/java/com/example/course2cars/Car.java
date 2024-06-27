@@ -1,11 +1,11 @@
 package com.example.course2cars;
 
 public class Car {
-    String model;
-    String stamp;
-    String color;
-    String number;
-    int owner_id;
+    private String model;
+    private String stamp;
+    private String color;
+    private String number;
+    private int owner_id;
 
     public Car(String model, String stamp, String color, String number, int owner_id) {
         this.model = model;

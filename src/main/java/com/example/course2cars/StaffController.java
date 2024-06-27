@@ -6,25 +6,44 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class CarsController {
+public class StaffController {
     @FXML
     public Button auto;
     @FXML
-    public Button assemble;
+    public Button saveNewInfo;
+    @FXML
+    public TextField address;
+    @FXML
+    public TextField phone;
+    @FXML
+    public TextField name;
     @FXML
     public Button userCab;
     @FXML
-    public FlowPane test;
+    public Button assemble;
+    public TextField login;
+    public TextField password;
+    public Label idShower;
 
     @FXML
-    private void paintCars() {
-
+    private void initialize() {
+        idShower.setText("ID: " + Config.currentStaff.getId());
+        login.setText(Config.currentStaff.getLogin());
+        password.setText(Config.currentStaff.getPassword());
+        address.setText(Config.currentStaff.getAddress());
+        name.setText(Config.currentStaff.getName());
+    }
+    @FXML
+    private void changeInfo(ActionEvent event) {
+        DataBase db = DataBase.getDB();
+        db.updateStaff(new Staff(address.getText(), name.getText(), login.getText(), password.getText()));
     }
 
     @FXML
@@ -45,6 +64,7 @@ public class CarsController {
         } else {
             return;
         }
+
         stage = (Stage) button.getScene().getWindow(); // получаем окно этой кнопки
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newWindow)));
         Scene scene = new Scene(root); // Получаем новое окно
