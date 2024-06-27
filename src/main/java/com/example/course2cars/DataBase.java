@@ -34,7 +34,7 @@ public class DataBase extends Config {
         try {
             String insert = "INSERT INTO " + DBnames.OWNER_TABLE + "(" + //sql-запрос для ввода данных
                 DBnames.OWNER_NAME + "," + DBnames.OWNER_ADDRESS + "," +
-                DBnames.OWNER_PHONE + "," + DBnames.OWNER_LOGIN + "," + DBnames.OWNER_PASSWORD + ")" + "VALUES(?, ?, ?, ?, ?)";
+                DBnames.OWNER_PHONE + "," + DBnames.OWNER_LOGIN + "," + DBnames.OWNER_PASSWORD + ") VALUES(?, ?, ?, ?, ?)";
 
             PreparedStatement ps = getDbConnection().prepareStatement(insert); // Указание заготовки для подготовки к записи в базу данных
             ps.setString(1, owner.getName());
@@ -43,6 +43,25 @@ public class DataBase extends Config {
             ps.setString(4, owner.getLogin());
             ps.setString(5, owner.getPassword());
             ps.executeUpdate(); // Запись
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addCar(Car car) {
+        try {
+            String insert = "INSERT INTO " + DBnames.CARS_TABLE + "(" +
+                    DBnames.CARS_NUMBER + ", " + DBnames.CARS_COLOR + ", " +
+                    DBnames.CARS_STAMP + ", " + DBnames.CARS_MODEL + ", " +
+                    DBnames.CARS_OWNER_ID + ") VALUES(?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = getDbConnection().prepareStatement(insert);
+            ps.setString(1, car.getNumber());
+            ps.setString(2, car.getColor());
+            ps.setString(3, car.getStamp());
+            ps.setString(4, car.getModel());
+            ps.setInt(5, car.getOwner_id());
+            ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

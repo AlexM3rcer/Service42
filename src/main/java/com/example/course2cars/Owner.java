@@ -33,6 +33,10 @@ public class Owner extends User{
         this.cars = cars;
     }
 
+    public void addCar(Car car) {
+        cars.add(car);
+    }
+
     public String getPhone() {
         return phone;
     }

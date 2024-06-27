@@ -14,7 +14,7 @@ public class Assembles {
         ArrayList<Assemble> assembles = new ArrayList<>();
         ResultSet resultSet = null;
         try (Statement statement = connection.createStatement()) {
-            if (Config.currentOwner() == Config.currentOwner()) {
+            if (Config.currentUser() == Config.currentUser()) {
                 resultSet = statement.executeQuery("SELECT " +
                         DBnames.INSTALLATIONS_CAR + ", " + DBnames.INSTALLATIONS_DETAIL + ", " +
                         DBnames.INSTALLATIONS_END + ", " + DBnames.INSTALLATIONS_START + ", " +

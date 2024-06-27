@@ -71,7 +71,7 @@ public class UserController {
                 staff.setId(resultSet.getInt(DBnames.STAFF_ID));
                 staff.setAddress(resultSet.getString(DBnames.STAFF_ADDRESS));
                 staff.setAssembles(db.getAssembles());
-
+                return true;
             } else {
 
                 resultSet = db.getOwner(user);
