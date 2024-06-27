@@ -6,69 +6,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class UserCabController {
+public class CarsController {
     @FXML
     public Button auto;
     @FXML
-    public Button saveAddress;
-    @FXML
-    public TextField address;
-    @FXML
-    public Button savePhone;
-    @FXML
-    public TextField phone;
-    @FXML
-    public Button saveName;
-    @FXML
-    public TextField name;
+    public Button assemble;
     @FXML
     public Button userCab;
     @FXML
-    public Button assemble;
-    public Button saveLogin;
-    public Button savePassword;
-    public TextField login;
-    public TextField password;
+    public FlowPane test;
 
     @FXML
-    private void changeInfo(ActionEvent event) {
-        DataBase db = new DataBase();
-        if (event.getSource() == saveName) {
+    private void paintCars() {
 
-            db.updateOwnerName(name.getText());
-
-            Config.currentOwner.setName(name.getText());
-
-        } else if (event.getSource() == savePhone) {
-
-            db.updateOwnerPhone(phone.getText());
-
-            Config.currentOwner.setPhone(phone.getText());
-
-        } else if (event.getSource() == saveAddress) {
-
-            db.updateOwnerAddress(address.getText());
-
-            Config.currentOwner.setAddress(address.getText());
-
-        } else if (event.getSource() == savePassword) {
-
-            db.updateOwnerPassword(password.getText());
-
-            Config.currentOwner.setPassword(password.getText());
-
-        } else if (event.getSource() == saveLogin) {
-
-            db.updateOwnerLogin(login.getText());
-
-            Config.currentOwner.setLogin(login.getText());
-        }
     }
 
     @FXML

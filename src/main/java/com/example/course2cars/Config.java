@@ -8,4 +8,5 @@ public class Config {
     static String dbUser = "root"; // Имя пользователя. root - по умолчанию
     static String dbPassword = "368952"; // Пароль пользователя
     static Owner currentOwner;
+    static Staff currentStaff;
 }

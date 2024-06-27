@@ -16,33 +16,7 @@ import java.util.Objects;
 // Здесь указаны все элементы и методы
 // для этих элементов (кнопки, текстовые поля и т.д.)
 public class RegController {
-    @FXML
-    private TextField regLogin;
-    @FXML
-    private TextField regPassword;
-    @FXML
-    private Label regComplete;
-    @FXML
-    private Button regFinish;
-    @FXML
-    private Button authorization;
-    @FXML
-    private TextField regName;
-    @FXML
-    private TextField regPhone;
-    @FXML
-    private TextField regAddress;
-    @FXML
-    void register() { // Регистрация пользователя
-        DataBase db = new DataBase(); // Создаем объект класса базы данных для регистрации
 
-        // Делаем заготовку для записи в базу данных
-        Owner owner = new Owner(regPhone.getText(), regAddress.getText(), regName.getText(), regLogin.getText(), regPassword.getText());
-
-        db.registerUser(owner); // при нажатии на кнопку regFinish заносим запись в базу данных
-
-        regComplete.setText("Complete!");
-    }
     @FXML
     private void changeWindow (ActionEvent event) throws Exception { // Для смены окна
         Stage stage;

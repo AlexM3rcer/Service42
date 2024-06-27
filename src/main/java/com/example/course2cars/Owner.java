@@ -1,22 +1,36 @@
 package com.example.course2cars;
 
-public class Owner {
-    String phone;
-    String address;
-    String name;
-    String login;
-    String password;
+import java.util.ArrayList;
+
+public class Owner extends User{
+    private String phone;
+    private ArrayList<Car> cars;
 
     public Owner(String phone, String address, String name, String login, String password) {
         this.phone = phone;
-        this.address = address;
-        this.name = name;
-        this.login = login;
-        this.password = password;
+        setAddress(address);
+        setName(name);
+        setLogin(login);
+        setPassword(password);
+    }
+
+    public Owner(User user) {
+        setAddress(user.getAddress());
+        setName(user.getName());
+        setLogin(user.getLogin());
+        setPassword(user.getPassword());
     }
 
     public Owner() {
 
+    }
+
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(ArrayList<Car> cars) {
+        this.cars = cars;
     }
 
     public String getPhone() {
@@ -25,37 +39,5 @@ public class Owner {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

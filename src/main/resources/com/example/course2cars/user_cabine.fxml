@@ -4,25 +4,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.UserCabController">
+<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.OwnerController">
     <children>
         <ButtonBar layoutX="180.0" layoutY="14.0" prefHeight="40.0" prefWidth="392.0">
             <buttons>
-                <Button fx:id="auto" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" text="Мои автомобили" />
-                <Button fx:id="assemble" onAction="#changeWindow" mnemonicParsing="false" text="Сборки" />
-                <Button fx:id="userCab" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: GRAY;" text="Личный кабинет" />
+                <Button fx:id="auto" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" text="Мои автомобили" />
+                <Button fx:id="assemble" mnemonicParsing="false" onAction="#changeWindow" text="Сборки" />
+                <Button fx:id="userCab" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: GRAY;" text="Личный кабинет" />
             </buttons>
         </ButtonBar>
       <TextField fx:id="name" layoutX="78.0" layoutY="76.0" prefHeight="26.0" prefWidth="234.0" />
       <Label layoutX="39.0" layoutY="80.0" text="ФИО" />
-      <Button fx:id="saveName" layoutX="339.0" layoutY="76.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
       <TextField fx:id="phone" layoutX="95.0" layoutY="125.0" prefHeight="26.0" prefWidth="169.0" />
       <Label layoutX="29.0" layoutY="130.0" text="Телефон" />
-      <Button fx:id="savePhone" layoutX="288.0" layoutY="126.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
       <TextField fx:id="address" layoutX="94.0" layoutY="178.0" prefHeight="26.0" prefWidth="169.0" />
       <Label layoutX="36.0" layoutY="183.0" text="Адрес" />
-      <Button fx:id="saveAddress" layoutX="287.0" layoutY="179.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
-      <Label layoutX="36.0" layoutY="24.0" prefHeight="35.0" prefWidth="145.0" text="ID: ">
+      <Label fx:id="idShower" layoutX="36.0" layoutY="24.0" prefHeight="35.0" prefWidth="145.0" text="ID: ">
          <font>
             <Font size="24.0" />
          </font>
@@ -31,7 +28,6 @@
       <Label layoutX="32.0" layoutY="280.0" text="Пароль" />
       <TextField fx:id="login" layoutX="95.0" layoutY="228.0" />
       <TextField fx:id="password" layoutX="96.0" layoutY="276.0" />
-      <Button fx:id="saveLogin" layoutX="287.0" layoutY="228.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
-      <Button fx:id="savePassword" layoutX="287.0" layoutY="276.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
+      <Button fx:id="saveNewInfo" layoutX="250.0" layoutY="342.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
     </children>
 </AnchorPane>

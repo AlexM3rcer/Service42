@@ -14,6 +14,8 @@ public class DBnames {
     public static final String STAFF_NAME = "name";
     public static final String STAFF_ID = "id";
     public static final String STAFF_ADDRESS = "address";
+    public static final String STAFF_LOGIN = "login";
+    public static final String STAFF_PASSWORD = "password";
 
     public static final String MODEL_DETAILS_TABLE = "model_details";
     public static final String MODEL_DETAILS_DETAIL = "detail_number";

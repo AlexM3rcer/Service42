@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.course2cars.Assembles"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.AssemblesController">
+   <children>
+      <ButtonBar layoutX="190.0" layoutY="24.0" prefHeight="40.0" prefWidth="392.0">
+         <buttons>
+            <Button fx:id="auto" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" text="Мои автомобили" />
+            <Button fx:id="assemble" mnemonicParsing="false" onAction="#changeWindow" style="-fx-background-color: gray;" text="Сборки" />
+            <Button fx:id="userCab" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
+         </buttons>
+      </ButtonBar>
+   </children>
 </AnchorPane>
