@@ -68,4 +68,8 @@ public class Car {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+
+    public boolean infoFailed() {
+        return number.isEmpty() || model.isEmpty() || stamp.isEmpty() || color.isEmpty();
+    }
 }

@@ -53,4 +53,8 @@ public class Owner extends User{
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public boolean infoFailed() {
+        return getLogin().isEmpty() || getPassword().isEmpty() || getPhone().isEmpty() || getAddress().isEmpty() || getName().isEmpty();
+    }
 }

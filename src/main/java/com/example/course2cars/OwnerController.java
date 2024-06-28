@@ -126,16 +126,21 @@ public class OwnerController {
     @FXML
     private void addCarConfirm(ActionEvent event) {
         DataBase db = DataBase.getDB();
+
         Car car = new Car(addCarModel.getText(), addCarStamp.getText(),
                 addCarColor.getText(), addCarNum.getText(), Config.currentOwner.getId(),
                 Integer.parseInt(addCarMileage.getText()));
-        try {
-            db.addCar(car);
-            Config.currentOwner.addCar(car);
-        } catch (Exception e){;}
+        if (!(car.infoFailed())) {
+            try {
+                db.addCar(car);
+                Config.currentOwner.addCar(car);
+            } catch (Exception e) {
+                ;
+            }
 
-        Button button = (Button) event.getSource();
-        button.getScene().getWindow().hide();
+            Button button = (Button) event.getSource();
+            button.getScene().getWindow().hide();
+        }
     }
 
     @FXML

@@ -50,10 +50,10 @@ public class UserController {
 
         // Делаем заготовку для записи в базу данных
         Owner owner = new Owner(regPhone.getText(), regAddress.getText(), regName.getText(), regLogin.getText(), regPassword.getText());
-
-        db.registerUser(owner); // при нажатии на кнопку regFinish заносим запись в базу данных
-
-        regComplete.setText("Complete!");
+        if (!(owner.infoFailed())) {
+            db.registerUser(owner); // при нажатии на кнопку regFinish заносим запись в базу данных
+            regComplete.setText("Complete!");
+        }
     }
 
     boolean authorize() {
