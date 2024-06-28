@@ -71,6 +71,8 @@ public class UserController {
                 staff.setId(resultSet.getInt(DBnames.STAFF_ID));
                 staff.setAddress(resultSet.getString(DBnames.STAFF_ADDRESS));
                 staff.setAssembles(db.getAssembles());
+                Config.staffController = new StaffController();
+
                 return true;
             } else {
 
@@ -87,6 +89,8 @@ public class UserController {
                     owner.setId(resultSet.getInt(DBnames.OWNER_ID));
                     owner.setCars(db.getOwnerCars());
                     owner.setAssembles(db.getAssembles());
+                    Config.ownerController = new OwnerController();
+
                     return true;
                 }
             }
@@ -115,8 +119,14 @@ public class UserController {
         } else {
             return; // Если не получилось - метод заканчивает работу (во избежание ошибок в консоли)
         }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(newWindow));
+        if (Config.currentUser().equals(Config.currentStaff)) {
+            loader.setController(Config.staffController);
+        } else {
+            loader.setController(Config.ownerController);
+        }
         stage = (Stage) button.getScene().getWindow(); // получаем окно этой кнопки
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newWindow)));
+        root = loader.load();
         Scene scene = new Scene(root); // Получаем новое окно
         stage.setScene(scene); // Ставим новое окно вместо старого
         stage.show();

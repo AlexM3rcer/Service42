@@ -2,16 +2,18 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.OwnerController">
+<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <ButtonBar layoutX="180.0" layoutY="14.0" prefHeight="40.0" prefWidth="392.0">
          <buttons>
-            <Button fx:id="auto" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" text="Мои автомобили" />
-            <Button fx:id="assemble" onAction="#changeWindow" mnemonicParsing="false" text="Сборки" />
-            <Button fx:id="userCab" onAction="#changeWindow" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
+            <Button fx:id="auto" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" text="Мои автомобили" />
+            <Button fx:id="assemble" mnemonicParsing="false" onAction="#changeWindow" text="Сборки" />
+            <Button fx:id="userCab" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
          </buttons>
       </ButtonBar>
+      <Label fx:id="test" layoutX="231.0" layoutY="136.0" prefHeight="79.0" prefWidth="149.0" text="Label" />
    </children>
 </AnchorPane>

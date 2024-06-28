@@ -15,7 +15,7 @@ public class Assembles {
         ArrayList<Assemble> assembles = new ArrayList<>();
         ResultSet resultSet = null;
         try (Statement statement = connection.createStatement()) {
-            if (Objects.equals(Config.currentOwner.getLogin(), Config.currentUser().getLogin())) {
+            if (Config.currentOwner != null) {
                 resultSet = statement.executeQuery("SELECT " +
                         DBnames.INSTALLATIONS_CAR + ", " + DBnames.INSTALLATIONS_DETAIL + ", " +
                         DBnames.INSTALLATIONS_END + ", " + DBnames.INSTALLATIONS_START + ", "
@@ -25,7 +25,7 @@ public class Assembles {
                         " WHERE " + DBnames.CARS_OWNER_ID + " = " + Config.currentOwner.getId());
             } else {
                 resultSet = statement.executeQuery("SELECT * FROM " +
-                        DBnames.INSTALLATIONS_CAR +
+                        DBnames.INSTALLATIONS_TABLE +
                         " WHERE " + DBnames.STAFF_ID + " = " + Config.currentStaff.getId());
             }
             while (resultSet.next()) {

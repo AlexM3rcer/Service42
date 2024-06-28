@@ -276,4 +276,20 @@ public class DataBase extends Config {
     public ArrayList<Assemble> getAssembles() throws SQLException, ClassNotFoundException {
         return new Assembles(getDbConnection()).getAssembles();
     }
+
+    public ArrayList<Detail> getDetails() throws SQLException, ClassNotFoundException {
+        return new Details(getDbConnection()).getDetails();
+    }
+
+    public String getModel(String num) throws SQLException, ClassNotFoundException {
+        String select = "SELECT " + DBnames.CARS_MODEL + " FROM " +
+                DBnames.CARS_TABLE + " WHERE " + DBnames.CARS_NUMBER + " = ?";
+        PreparedStatement ps = DataBase.getDB().getDbConnection().prepareStatement(select);
+        ps.setString(1, num);
+        ResultSet resultSet1 = ps.executeQuery();
+        resultSet1.next();
+        String model = resultSet1.getString(DBnames.CARS_MODEL);
+        resultSet1.close();
+        return model;
+    }
 }

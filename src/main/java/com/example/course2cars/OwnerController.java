@@ -3,10 +3,12 @@ package com.example.course2cars;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -91,6 +93,8 @@ public class OwnerController {
             writeCars();
         } else if (assemblePane != null) {
             writeAssembles();
+        } else if (addAssembleCar != null) {
+            setAssembleItems();
         }
     }
 
@@ -136,7 +140,7 @@ public class OwnerController {
             hBox.getChildren().add(assembleFormat(new Label("" + assemble.getEnd_date())));
             hBox.getChildren().add(assembleFormat(new Label("" + assemble.getWorking_time())));
 
-            carContent.getChildren().add(hBox);
+            assembleContent.getChildren().add(hBox);
         }
     }
 
@@ -159,7 +163,20 @@ public class OwnerController {
         ArrayList<String> names = new ArrayList<>();
         ArrayList<Staff> staffs = DataBase.getDB().getAllStaff();
         for (Staff staff : staffs) {
-            names.add(staff.getName());
+            names.add(staff.getId() + staff.getName());
+        }
+        return names;
+    }
+
+    private ArrayList<String> detailNums(String carNum) throws SQLException, ClassNotFoundException {
+        String carModel = DataBase.getDB().getModel(carNum);
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<Detail> details = DataBase.getDB().getDetails();
+        for (Detail detail : details) {
+            for (String model : detail.getModels()) {
+                if (model.equals(carModel))
+                    names.add(detail.getNumber());
+            }
         }
         return names;
     }
@@ -168,36 +185,43 @@ public class OwnerController {
     private void addAssemble() throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add_assemble.fxml"));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 600, 250);
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Новая сборка");
         stage.setScene(scene);
         stage.setOnHiding(event -> writeAssembles());
-        scene.getWindow().setOnShowing(event -> {
-            try {
-                setAssembleItems();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
         stage.show();
     }
 
     private void setAssembleItems() throws SQLException {
-        addAssembleCar.setItems(FXCollections.observableArrayList(carNums()));
-        addAssembleStaff.setItems(FXCollections.observableArrayList(staffNums()));
+        ArrayList<String> carNums = carNums();
+        ArrayList<String> staffNames = staffNums();
+        addAssembleCar.setItems(FXCollections.observableArrayList(carNums));
+        addAssembleStaff.setItems(FXCollections.observableArrayList(staffNames));
+    }
+
+    @FXML
+    private void setDetails() {
+        try {
+            addAssembleDetail.setItems(FXCollections.observableArrayList(detailNums((String)
+                    addAssembleCar.getSelectionModel().getSelectedItem())));
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     private void addAssembleConfirm(ActionEvent event) {
         DataBase db = DataBase.getDB();
         Assemble assemble = new Assemble();
-        Car car = (Car) addAssembleCar.getSelectionModel().getSelectedItem();
-        Staff staff = (Staff) addAssembleStaff.getSelectionModel().getSelectedItem();
-        assemble.setCar_number(car.getNumber());
-        assemble.setStaff_id(staff.getId());
+        String car = (String) addAssembleCar.getSelectionModel().getSelectedItem();
+        int staff = Integer.parseInt(((String) addAssembleStaff.getSelectionModel().getSelectedItem()).substring(0, 1));
+        String detail = ((String) addAssembleDetail.getSelectionModel().getSelectedItem());
+        assemble.setCar_number(car);
+        assemble.setDetail_number(detail);
+        assemble.setStaff_id(staff);
         assemble.setStart_date(new Date(System.currentTimeMillis()));
         try {
             db.addAssemble(assemble);

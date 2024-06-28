@@ -12,4 +12,7 @@ public class Config {
     public static User currentUser() {
         return currentStaff == null ? currentOwner : currentStaff;
     }
+
+    static OwnerController ownerController;
+    static StaffController staffController;
 }
