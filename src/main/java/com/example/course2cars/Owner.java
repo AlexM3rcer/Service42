@@ -37,6 +37,14 @@ public class Owner extends User{
         cars.add(car);
     }
 
+    public void delCar(String number) {
+        for (Car car : cars) {
+            if (car.getNumber().equals(number)) {
+                cars.remove(car);
+                break;
+            }
+        }
+    }
 
     public String getPhone() {
         return phone;

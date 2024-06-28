@@ -2,13 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.OwnerController">
    <children>
-      <ChoiceBox fx:id="addAssembleCar" onAction="#setDetails" layoutX="14.0" layoutY="69.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="addAssembleCar" layoutX="28.0" layoutY="69.0" onAction="#setDetails" prefWidth="150.0" />
       <ChoiceBox fx:id="addAssembleDetail" layoutX="208.0" layoutY="69.0" prefWidth="150.0" />
       <ChoiceBox fx:id="addAssembleStaff" layoutX="388.0" layoutY="69.0" prefWidth="150.0" />
-      <Button fx:id="addAssembleConfirmButton" onAction="#addAssembleConfirm" layoutX="239.0" layoutY="150.0" mnemonicParsing="false" text="Подтвердить" />
+      <Button fx:id="addAssembleConfirmButton" layoutX="239.0" layoutY="150.0" mnemonicParsing="false" onAction="#addAssembleConfirm" text="Подтвердить" />
+      <Label layoutX="59.0" layoutY="43.0" text="Номер машины" />
+      <Label layoutX="243.0" layoutY="43.0" text="Номер детали" />
+      <Label layoutX="433.0" layoutY="43.0" text="Сотрудник" />
    </children>
 </AnchorPane>

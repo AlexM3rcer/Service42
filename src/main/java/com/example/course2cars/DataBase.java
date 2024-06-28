@@ -333,4 +333,18 @@ public class DataBase extends Config {
             throw new RuntimeException(e);
         }
     }
+
+    public void deleteCar(String number, int id) {
+        try {
+            String delete = "DELETE FROM " + DBnames.CARS_TABLE + " WHERE " + DBnames.CARS_NUMBER +
+                    " = ? AND " + DBnames.CARS_OWNER_ID + " = ?";
+            PreparedStatement ps = getDbConnection().prepareStatement(delete);
+            ps.setString(1, number);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

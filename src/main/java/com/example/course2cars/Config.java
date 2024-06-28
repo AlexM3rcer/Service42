@@ -6,7 +6,7 @@ public class Config {
     static String dbPort = "3306"; //  Порт базы данных (по умолчанию стоит такой)
     static String dbName = "service42"; // Название базы данных
     static String dbUser = "root"; // Имя пользователя. root - по умолчанию
-    static String dbPassword = "368952"; // Пароль пользователя
+    static String dbPassword = ""; // Пароль пользователя
     static Owner currentOwner;
     static Staff currentStaff;
     public static User currentUser() {

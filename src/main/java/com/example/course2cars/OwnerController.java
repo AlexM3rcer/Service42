@@ -54,12 +54,22 @@ public class OwnerController {
     public ChoiceBox addAssembleDetail;
     public Button addAssembleConfirmButton;
     public Label successfulChange;
+    public Button deleteCarButton;
+    public TextField deleteCarNumber;
 
     private Label carFromat(Label label) {
         label.setWrapText(true);
         label.setMinWidth(carPane.getPrefWidth() / 5);
         label.setMaxWidth(carPane.getPrefWidth() / 5);
         return label;
+    }
+
+    @FXML
+    private void deleteCar() {
+        String number = deleteCarNumber.getText();
+        DataBase.getDB().deleteCar(number, Config.currentOwner.getId());
+        Config.currentOwner.delCar(number);
+        writeCars();
     }
 
     private void writeInfo() {
