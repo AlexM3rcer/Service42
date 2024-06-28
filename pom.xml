@@ -118,7 +118,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.course2cars/com.example.course2cars.HelloApplication</mainClass>
+              <mainClass>com.example.course2cars/com.example.course2cars.StartService42</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
