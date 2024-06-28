@@ -10,8 +10,10 @@ public class Assemble {
     private Date start_date;
     private int staff_id;
     private Time working_time;
+    private int id;
 
-    public Assemble(String car_number, String detail_number, Date end_date, Date start_date, int staff_id, Time working_time) {
+    public Assemble(int id, String car_number, String detail_number, Date end_date, Date start_date, int staff_id, Time working_time) {
+        this.id = id;
         this.car_number = car_number;
         this.detail_number = detail_number;
         this.end_date = end_date;
@@ -22,6 +24,14 @@ public class Assemble {
 
     public Assemble() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCar_number() {

@@ -88,11 +88,24 @@ public class DataBase extends Config {
             ps.setTime(5, assemble.getWorking_time());
             ps.setInt(6, assemble.getStaff_id());
             ps.executeUpdate();
+
+            removeDetail(assemble.getDetail_number());
+
             ps.close();
             dbConnection.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void removeDetail(String detailNum) throws SQLException, ClassNotFoundException {
+        String update = "UPDATE " + DBnames.DETAILS_TABLE + " SET " +
+                DBnames.DETAILS_AMOUNT + " = " + DBnames.DETAILS_AMOUNT + "-1" +
+                " WHERE " + DBnames.DETAILS_NUMBER + " = ?";
+        PreparedStatement ps = getDbConnection().prepareStatement(update);
+        ps.setString(1, detailNum);
+        ps.executeUpdate();
+        ps.close();
     }
 
     public ResultSet getOwner(User owner) { // Получаем пользователя для авторизации
@@ -291,5 +304,33 @@ public class DataBase extends Config {
         String model = resultSet1.getString(DBnames.CARS_MODEL);
         resultSet1.close();
         return model;
+    }
+
+    public void updateAssemble(Assemble assemble) {
+        try {
+            String update = "UPDATE " + DBnames.INSTALLATIONS_TABLE + " SET " +
+                    DBnames.INSTALLATIONS_END + " = ?, " + DBnames.INSTALLATIONS_WORKING + " = ? WHERE " +
+                    DBnames.INSTALLATIONS_ID + " = " + assemble.getId();
+            PreparedStatement ps = getDbConnection().prepareStatement(update);
+            ps.setDate(1, assemble.getEnd_date());
+            ps.setTime(2, assemble.getWorking_time());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getLastAssembleId() {
+        try {
+            String select = "SELECT " + DBnames.INSTALLATIONS_ID + " FROM " + DBnames.INSTALLATIONS_TABLE +
+                    " ORDER BY "+ DBnames.INSTALLATIONS_ID + " DESC LIMIT 1";
+            PreparedStatement ps = getDbConnection().prepareStatement(select);
+            ResultSet resultSet = ps.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(DBnames.INSTALLATIONS_ID);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

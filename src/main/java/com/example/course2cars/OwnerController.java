@@ -53,6 +53,7 @@ public class OwnerController {
     public ChoiceBox addAssembleStaff;
     public ChoiceBox addAssembleDetail;
     public Button addAssembleConfirmButton;
+    public Label successfulChange;
 
     private Label carFromat(Label label) {
         label.setWrapText(true);
@@ -133,6 +134,7 @@ public class OwnerController {
         for (Assemble assemble : Config.currentOwner.getAssembles()) {
             HBox hBox = new HBox();
 
+            hBox.getChildren().add(assembleFormat(new Label("" + assemble.getId())));
             hBox.getChildren().add(assembleFormat(new Label(assemble.getCar_number())));
             hBox.getChildren().add(assembleFormat(new Label(assemble.getDetail_number())));
             hBox.getChildren().add(assembleFormat(new Label("" + assemble.getStaff_id())));
@@ -146,8 +148,8 @@ public class OwnerController {
 
     private Label assembleFormat(Label label) {
         label.setWrapText(true);
-        label.setMinWidth(assemblePane.getPrefWidth() / 6);
-        label.setMaxWidth(assemblePane.getPrefWidth() / 6);
+        label.setMinWidth(assemblePane.getPrefWidth() / 7);
+        label.setMaxWidth(assemblePane.getPrefWidth() / 7);
         return label;
     }
 
@@ -173,6 +175,8 @@ public class OwnerController {
         ArrayList<String> names = new ArrayList<>();
         ArrayList<Detail> details = DataBase.getDB().getDetails();
         for (Detail detail : details) {
+            if (detail.getAmount() == 0)
+                continue;
             for (String model : detail.getModels()) {
                 if (model.equals(carModel))
                     names.add(detail.getNumber());
@@ -225,6 +229,7 @@ public class OwnerController {
         assemble.setStart_date(new Date(System.currentTimeMillis()));
         try {
             db.addAssemble(assemble);
+            assemble.setId(db.getLastAssembleId());
             Config.currentOwner.addAssemble(assemble);
         } catch (Exception e) {;}
 
@@ -236,6 +241,7 @@ public class OwnerController {
     private void changeInfo(ActionEvent event) {
         DataBase db = DataBase.getDB();
         db.updateOwner(new Owner(phone.getText(), address.getText(), name.getText(), login.getText(), password.getText()));
+        successfulChange.setText("Успешно");
     }
 
     @FXML
@@ -257,8 +263,12 @@ public class OwnerController {
             return;
         }
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(newWindow));
+        if (!(newWindow.equals("cars.fxml")))
+            loader.setController(Config.ownerController);
+
         stage = (Stage) button.getScene().getWindow(); // получаем окно этой кнопки
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newWindow)));
+        root = loader.load();
         Scene scene = new Scene(root); // Получаем новое окно
         stage.setScene(scene); // Ставим новое окно вместо старого
         stage.show();

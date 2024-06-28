@@ -120,9 +120,9 @@ public class UserController {
             return; // Если не получилось - метод заканчивает работу (во избежание ошибок в консоли)
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource(newWindow));
-        if (Config.currentUser().equals(Config.currentStaff)) {
+        if (Config.currentUser() != null && Config.currentUser().equals(Config.currentStaff)) {
             loader.setController(Config.staffController);
-        } else {
+        } else if (!(newWindow.equals("reg.fxml")) && !(newWindow.equals("view.fxml"))){
             loader.setController(Config.ownerController);
         }
         stage = (Stage) button.getScene().getWindow(); // получаем окно этой кнопки

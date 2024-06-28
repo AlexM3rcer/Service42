@@ -22,6 +22,16 @@ public class User {
         assembles.add(assemble);
     }
 
+    public void updateAssemble(Assemble assemble) {
+        for (Assemble assemble1 : assembles) {
+            if (assemble1.getId() == assemble.getId()) {
+                assemble1.setEnd_date(assemble.getEnd_date());
+                assemble1.setWorking_time(assemble.getWorking_time());
+                break;
+            }
+        }
+    }
+
     public String getAddress() {
         return address;
     }

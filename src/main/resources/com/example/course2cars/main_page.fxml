@@ -14,6 +14,5 @@
             <Button fx:id="userCab" mnemonicParsing="false" onAction="#changeWindow" prefHeight="26.0" prefWidth="147.0" text="Личный кабинет" />
          </buttons>
       </ButtonBar>
-      <Label fx:id="test" layoutX="231.0" layoutY="136.0" prefHeight="79.0" prefWidth="149.0" text="Label" />
    </children>
 </AnchorPane>

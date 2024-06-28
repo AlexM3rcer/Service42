@@ -16,7 +16,7 @@ public class Assembles {
         ResultSet resultSet = null;
         try (Statement statement = connection.createStatement()) {
             if (Config.currentOwner != null) {
-                resultSet = statement.executeQuery("SELECT " +
+                resultSet = statement.executeQuery("SELECT " + DBnames.INSTALLATIONS_ID + ", " +
                         DBnames.INSTALLATIONS_CAR + ", " + DBnames.INSTALLATIONS_DETAIL + ", " +
                         DBnames.INSTALLATIONS_END + ", " + DBnames.INSTALLATIONS_START + ", "
                         + DBnames.INSTALLATIONS_STAFF + ", " + DBnames.INSTALLATIONS_WORKING +
@@ -26,16 +26,17 @@ public class Assembles {
             } else {
                 resultSet = statement.executeQuery("SELECT * FROM " +
                         DBnames.INSTALLATIONS_TABLE +
-                        " WHERE " + DBnames.STAFF_ID + " = " + Config.currentStaff.getId());
+                        " WHERE " + DBnames.INSTALLATIONS_STAFF + " = " + Config.currentStaff.getId());
             }
             while (resultSet.next()) {
+                int id = resultSet.getInt(DBnames.INSTALLATIONS_ID);
                 String car_number = resultSet.getString(DBnames.INSTALLATIONS_CAR);
                 String detail_number = resultSet.getString(DBnames.INSTALLATIONS_DETAIL);
                 Date end_date = resultSet.getDate(DBnames.INSTALLATIONS_END);
                 Date start_date = resultSet.getDate(DBnames.INSTALLATIONS_START);
                 int staff_id = resultSet.getInt(DBnames.INSTALLATIONS_STAFF);
                 Time working_time = resultSet.getTime(DBnames.INSTALLATIONS_WORKING);
-                Assemble assemble = new Assemble(car_number, detail_number, end_date, start_date, staff_id, working_time);
+                Assemble assemble = new Assemble(id, car_number, detail_number, end_date, start_date, staff_id, working_time);
                 assembles.add(assemble);
             }
         }

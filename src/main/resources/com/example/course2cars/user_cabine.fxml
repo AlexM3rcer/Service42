@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.course2cars.OwnerController">
+<AnchorPane prefHeight="410.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ButtonBar layoutX="180.0" layoutY="14.0" prefHeight="40.0" prefWidth="392.0">
             <buttons>
@@ -16,7 +16,7 @@
       <TextField fx:id="name" layoutX="78.0" layoutY="224.0" prefHeight="26.0" prefWidth="234.0" />
       <Label layoutX="40.0" layoutY="228.0" text="ФИО" />
       <TextField fx:id="phone" layoutX="96.0" layoutY="265.0" prefHeight="26.0" prefWidth="169.0" />
-      <Label layoutX="30.0" layoutY="270.0" text="Телефон" />
+      <Label fx:id="userCabPhone" layoutX="30.0" layoutY="270.0" text="Телефон" />
       <TextField fx:id="address" layoutX="94.0" layoutY="178.0" prefHeight="26.0" prefWidth="169.0" />
       <Label layoutX="36.0" layoutY="183.0" text="Адрес" />
       <Label fx:id="idShower" layoutX="36.0" layoutY="24.0" prefHeight="35.0" prefWidth="145.0" text="ID: ">
@@ -29,5 +29,10 @@
       <TextField fx:id="login" layoutX="97.0" layoutY="91.0" />
       <TextField fx:id="password" layoutX="100.0" layoutY="130.0" />
       <Button fx:id="saveNewInfo" layoutX="250.0" layoutY="342.0" mnemonicParsing="false" onAction="#changeInfo" text="Сохранить" />
+      <Label fx:id="successfulChange" layoutX="357.0" layoutY="145.0" prefHeight="91.0" prefWidth="161.0" textFill="#00dc16">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
